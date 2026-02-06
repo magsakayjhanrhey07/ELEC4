@@ -9,19 +9,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    # Step 2: Set up Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
+    # Step 3: Debug - list files to confirm requirements.txt exists
+    - name: List repo files
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Files in repo root:"
+        ls -la
+
+    # Step 4: Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    # Step 5: Run tests
     - name: Run tests
       run: |
         pytest
